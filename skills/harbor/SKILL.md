@@ -56,6 +56,14 @@ All hold → cite and proceed. Thin evidence → gather evidence first. Substant
 
 **Evidence invalidation ≠ intent invalidation.** A new PR push invalidates technical readiness (withdraw `merge-ready`, re-verify affected dimensions) but not the signed "this is worth doing". A changed goal or scope re-opens the business decision. New scope, breaking API changes, or new features in a diff are new decisions, not noise. A merge approval binds to the exact PR head and its base/check conditions.
 
+## The rejection ledger — `.out-of-scope/`
+
+A signed rejection of an enhancement outlives the issue it closed. When the desk signs a rejection (enhancement class), also commit one file under the repo's `.out-of-scope/` directory: what was refused, the signed reason with its evidence link, and the decision date — one refusal, one file. The tracker record stays authoritative for state; the ledger persists the *reason* where future sweeps — and future reporters — can find it.
+
+Before recommending any disposition on a fresh ship, sweep the ledger: a match by concept (never by wording) is cited like any prior signed rule — same reuse-check discipline, including whether the original facts still hold. A ledger hit may let harbor skip an expensive reproduction that could not change the outcome; mark such a step explicitly as not-run.
+
+What does **not** enter the ledger: rejected bug reports (those are claims about behavior, not about wanted scope), duplicates closed against a still-valid parent, and "already implemented" findings — the code itself is the record for those. Ledger entries are repo content like ADRs: versioned, reviewable, and removable only by a signed decision that supersedes the refusal.
+
 ## Step 0 — bind the tracker, before anything else
 
 Verify the remote tracker responds (`gh repo view` on the recorded/implicit remote) **and that it is the expected repository**. If it does, the remote tracker is the ONLY medium for dispositions: every sheet, label, and docket lives there. A local `issues/` directory (or any untracked markdown collection) is **content to inspect, never a tracker to write to** — chaotic repos are full of lookalike directories, and writing dispositions into local files strands them where reporters and maintainers will never see them. If the remote is unreachable, stop and report the blocker — do not fall back to local files.
@@ -103,6 +111,15 @@ A ruling that answers scope questions returns the ship to the desk for re-dispos
 **External knowledge extraction.** When the answer belongs to a person outside the desk — an upstream author, a domain expert the evidence names — the questionnaire is sent where that person can see it: one issue comment naming them, carrying everything they need to answer in one read (the question, the context, the options if any), within the granted communication scope. Only the send is prepared; the subject is never grilled, and no third party is cold-contacted. The ship waits with the questionnaire linked, the reply lands as evidence, and the desk disposes on it like any other record.
 
 **Restatement gate.** Before a signed disposition ships — accepted, rejected, merged-ready, or a standing-authorization action — harbor restates what it understood and what it will do in one sentence each, and checks both against the evidence. A disposition built on a misread claim is wasted authority: if the restatement does not match the evidence or the signed intent, the disposition goes back to the desk instead of the tracker.
+
+## Handoff routing — who picks up the work
+
+An accepted ship gets one dispatch label at handoff time, answering a single question: **who implements this?**
+
+- `ready-for-agent`: the signed record contains everything an autonomous agent needs — verified facts, exact object set, allowed actions, no open judgment calls. This is the default: the pipeline starts without a human in the loop.
+- `ready-for-human`: the work needs a person — judgment calls nobody signed for, credentials or external access the host cannot grant, design decisions still open, or verification only a human can perform. The dispatch note states **why it cannot be delegated**, in one line; "human" alone is not a reason.
+
+Neither label is a `harbor:*` state — the eight state labels are unchanged; these two ride alongside at handoff. A `ready-for-human` ship keeps its current state label until the human constraint clears, at which point harbor re-routes it.
 
 ## PR loop
 
@@ -175,3 +192,7 @@ Harbor itself runs no daemons and keeps no timers — but the sweep does not nee
 ## Completion definition
 
 A sweep ends with the docket accurate: every arrival inspected or explicitly blocked, every autonomous action logged with its authorization, one signature queue where each box carries one question with options and evidence — and the maintainer's entire effort is a handful of one-word rulings. Zero overreach; nothing stranded; nothing invented.
+
+---
+
+*Concepts absorbed from [mattpocock/skills](https://github.com/mattpocock/skills) `triage` (MIT © 2026 Matt Pocock) — see `CREDITS.md` in the repo root. Taken: the persistent rejection ledger and the agent/human handoff split. Dropped: triage's role state machine and its per-PR deltas — harbor's four records and label set already carry those duties. Why: two real gaps, plugged in harbor's own vocabulary, no new state enums.*
