@@ -40,13 +40,14 @@ For questions about state, business rules, data shape, or algorithms ("does unlo
 For questions of shape and arrangement ("steps or cards?", "where does progress live?"):
 
 1. One route, **three variants that differ in structure** — information architecture, navigation model, density. Variants that differ only in styling answer nothing: three reskins are wallpaper.
-2. A switcher on the page cycles the variants; embed into the existing product where possible, so real data density stresses the design instead of three tidy fake rows.
+2. A switcher on the page cycles the variants; embed into the existing product where possible, so real data density stresses the design instead of three tidy fake rows. Relevant state renders on every switch — the captain reacts to what changed, not to a screenshot of the finish.
 3. On confirmation, the **decision** transfers and the variants stay behind on the branch as the record of why it looks this way.
 
 ## The discipline
 
 - One command to run — the repo's simplest existing serve command; inline the module into the shell if `file://` module CORS would bite. Loads in seconds; no build step beyond what the repo already has.
 - No persistence, no tests, no abstractions, no error handling beyond the happy path. The artifact should be something you **would not want to ship** — the rules exist to keep it that way.
+- The artifact wears its throwaway mark everywhere it can be met: the `loft/<name>` branch name, a header line in the shell, and its home beside the code it probes. A passerby should see *loft, not product* before reading a word of it.
 - Expect the first shape to be argued with: revise on the branch within the same session. The captain confirming the **final** shape is the decision; an artifact nobody argues with usually answered a question nobody had.
 - The artifact's whole life is minutes to build and one session to decide. If it starts growing into production code, stop: that work is a launch effort, not a loft. Sunk cost is the failure mode this skill exists to prevent.
 - One loft answers **one** question. Two questions are two lofts — or one question that was actually two.
@@ -57,7 +58,8 @@ The artifact is evidence, not a landing. When the captain reacts:
 
 1. Record the decision where it lives — the issue comment, the spec's Implementation Decisions, or the pending-decision note — in the captain's own words plus one line of why. A fragment more precise than prose (the reducer, the state machine, the schema) may be inlined there, marked as lofted.
 2. Push the artifact to a `loft/<name>` branch. It never merges: it stays as the primary source a future reader can open when the decision's "why" matters.
-3. Nothing from the artifact lands in `main` — for the logic fork the confirmed module re-enters as real work through launch, for the UI fork the real page is built fresh from the decision.
+3. A primary source nobody can find is no source at all. The decision record from step 1 carries the pointer: the branch name, the question the loft settled, and the one-line verdict. The branch is reachable only through the decision — write the pointer before the session ends, or the artifact becomes a dead hull.
+4. Nothing from the artifact lands in `main` — for the logic fork the confirmed module re-enters as real work through launch, for the UI fork the real page is built fresh from the decision.
 
 ## Scope and non-goals
 
@@ -68,3 +70,13 @@ The artifact is evidence, not a landing. When the captain reacts:
 ## Completion definition
 
 The captain reacted, the answer sits where the decision lives, the artifact sits on its branch — and no line of the artifact is in `main`.
+
+---
+
+## Provenance
+
+Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) `prototype` (MIT © 2026 Matt Pocock) — concepts re-expressed in shipyard vocabulary, not ported verbatim.
+
+- **Absorbed:** the throwaway marking discipline (artifact visibly labeled as a loft, placed beside the code it probes), state exposure on every interaction including UI variant switches, and the context-pointer rule — the decision record links the `loft/<name>` branch as the primary source.
+- **Dropped:** the two-branch reference-doc framing (loft's own forks already cover it) and the scratch-database escape hatch (v1 treats persistence as out of scope outright).
+- **Why:** a decision's evidence decays the moment the artifact is anonymous or unreachable; the marking and pointer rules close exactly that gap.
