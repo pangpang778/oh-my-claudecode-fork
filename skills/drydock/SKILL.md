@@ -388,7 +388,7 @@ Diff actual repo state against the shipyard map; report: missing surfaces, a mis
 
 ---
 
-## Absorption note
+## Provenance
 
 Vocabulary in the governance loop above (challenge-on-collision, sharpen-the-fuzzy, write-inline, ADR three-test) is absorbed and rewritten from mattpocock/skills `domain-modeling` (MIT © 2026 Matt Pocock); see [CREDITS.md](../../CREDITS.md).
 

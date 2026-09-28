@@ -195,4 +195,6 @@ A sweep ends with the docket accurate: every arrival inspected or explicitly blo
 
 ---
 
-*Concepts absorbed from [mattpocock/skills](https://github.com/mattpocock/skills) `triage` (MIT © 2026 Matt Pocock) — see [CREDITS.md](../../CREDITS.md). Taken: the persistent rejection ledger and the agent/human handoff split. Dropped: triage's role state machine and its per-PR deltas — harbor's four records and label set already carry those duties. Why: two real gaps, plugged in harbor's own vocabulary, no new state enums.*
+## Provenance
+
+Concepts absorbed from [mattpocock/skills](https://github.com/mattpocock/skills) `triage` (MIT © 2026 Matt Pocock) — see [CREDITS.md](../../CREDITS.md). Taken: the persistent rejection ledger and the agent/human handoff split. Dropped: triage's role state machine and its per-PR deltas — harbor's four records and label set already carry those duties. Why: two real gaps, plugged in harbor's own vocabulary, no new state enums.
