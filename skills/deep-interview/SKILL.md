@@ -50,6 +50,8 @@ Inspired by the [Ouroboros project](https://github.com/Q00/ouroboros) which demo
 - Allow early exit with a clear warning if ambiguity is still high
 - Persist interview state for resume across session interruptions
 - Challenge agents activate at specific round thresholds to shift perspective
+- Challenge the glossary as you go: when an answer's wording collides with a term already settled in the ontology or in a repo `CONTEXT.md`, name the collision that round instead of letting two meanings of one word ride along
+- When a term is resolved, update `CONTEXT.md` that same round -- see Glossary Discipline below
 </Execution_Policy>
 
 <Autoresearch_Mode>
@@ -230,6 +232,16 @@ Opt-in mode, absorbed from mattpocock/skills grilling (`--frontier` flag or expl
 - Ambiguity scoring still runs after each round (Step 2c), over all answers received. `weakest_dimension` is still computed and recorded but does not gate which questions are asked while the mode is active.
 - The interview is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed.
 
+## Glossary Discipline (absorbed from mattpocock/skills domain-modeling)
+
+The ontology snapshots track convergence mathematically; this discipline keeps the *names* honest while the interview runs. It is the active half of vocabulary work — not just reading a repo `CONTEXT.md`, but pushing back on it.
+
+- **Challenge collisions immediately.** When an answer reuses a word the glossary or ontology already defined with a different meaning, call it out that round: "Round 3 settled `cargo` as the shipped unit, but you just used it for the manifest. Which one moves?" Do not carry two meanings of one word into later rounds.
+- **Sharpen overloaded terms.** When the user's word is doing double duty, propose a canonical name and get it confirmed: "You keep saying `dock` — is that the physical berth or the whole harbor? Pick one term for each."
+- **Stress the boundary with a concrete case.** When two entities are being distinguished, probe the edge: name a specific instance that sits between them and ask which side it falls on. Vague boundaries survive abstract discussion; they break on real examples.
+- **Cross-check against the repo.** When the user states how something works and the brownfield context disagrees, surface the contradiction with the citation instead of letting it pass.
+- **Update `CONTEXT.md` inline, the round the term settles.** Do not batch vocabulary into spec crystallization. If the repo has no `CONTEXT.md`, create it lazily on the first resolved term. `CONTEXT.md` is a glossary and nothing else — no implementation detail, no acceptance criteria, no spec content. The spec records the interview's full state; the glossary records only the words.
+
 ## Phase 2: Interview Loop
 
 Repeat until `ambiguity ≤ threshold` OR user exits early:
@@ -253,6 +265,7 @@ If any prompt input is too large, summarize it first and then continue from the 
 - State, in one sentence before the question, why this component/dimension pair is now the bottleneck to reducing ambiguity
 - Questions should expose ASSUMPTIONS, not gather feature lists
 - If the scope is still conceptually fuzzy (entities keep shifting, the user is naming symptoms, or the core noun is unstable), switch to an ontology-style question that asks what the thing fundamentally IS before returning to feature/detail questions
+- Per Glossary Discipline: when a term collision or overloaded word surfaces in the answer, the next question resolves it to one canonical name before returning to the weakest dimension
 
 **Question styles by dimension:**
 | Dimension | Question Style | Example |
@@ -703,6 +716,7 @@ Why bad: 45% ambiguity means nearly half the requirements are unclear. The mathe
 - [ ] Multi-component interviews rotate targeting across active components when N > 1
 - [ ] Spec includes Topology section with confirmed active components and user-confirmed deferrals
 - [ ] Spec includes Ontology (Key Entities) table and Ontology Convergence section
+- [ ] Glossary Discipline ran: term collisions were challenged the round they surfaced, and settled terms were written to `CONTEXT.md` inline rather than batched at crystallization
 </Final_Checklist>
 
 <Advanced>
@@ -812,3 +826,8 @@ Each mode is used exactly once, then normal Socratic questioning resumes. Modes 
 </Advanced>
 
 Task: {{ARGUMENTS}}
+
+---
+
+<!-- Attribution: glossary-discipline section adapted from mattpocock/skills `domain-modeling` (MIT, © 2026 Matt Pocock); see repo CREDITS.md -->
+三行判语：吸收了「访谈中挑战术语冲突、磨尖重载用词、决策落定即内联更新 CONTEXT.md」的活跃词汇纪律；丢弃了 CONTEXT-MAP.md 多上下文布局与 ADR/格式模板的产出职责（后者归 drydock，v1 单仓库单 glossary）；因为 deep-interview 此前只数学化追踪实体收敛，不动手纠正词汇本身——补的正是这半边。
