@@ -825,9 +825,7 @@ Each mode is used exactly once, then normal Socratic questioning resumes. Modes 
 | Extreme ambiguity | Almost nothing known | Early stages, keep going |
 </Advanced>
 
-Task: {{ARGUMENTS}}
-
----
-
-<!-- Attribution: glossary-discipline section adapted from mattpocock/skills `domain-modeling` (MIT, © 2026 Matt Pocock); see repo CREDITS.md -->
+<!-- Attribution: glossary-discipline section adapted from mattpocock/skills `domain-modeling` (MIT, © 2026 Matt Pocock); see [CREDITS.md](../../CREDITS.md) -->
 三行判语：吸收了「访谈中挑战术语冲突、磨尖重载用词、决策落定即内联更新 CONTEXT.md」的活跃词汇纪律；丢弃了 CONTEXT-MAP.md 多上下文布局与 ADR/格式模板的产出职责（后者归 drydock，v1 单仓库单 glossary）；因为 deep-interview 此前只数学化追踪实体收敛，不动手纠正词汇本身——补的正是这半边。
+
+Task: {{ARGUMENTS}}

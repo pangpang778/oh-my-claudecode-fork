@@ -27,7 +27,7 @@
 - 来源技能：`triage`（mattpocock/skills）
 - 许可：MIT © 2026 Matt Pocock
 - 吸收了什么：验证先行（先复现/核实再派工）、needs-info 回询模板、AI 生成内容的披露行、复用检查（查重既有实现）。
-- 丢弃了什么：triage 的表单式逐字段 intake，harbor 用标签门控（`in-harbor`/`needs-info`/`ready-for-human`/`ready-for-agent`）驱动流转；被拒项沉淀为 `.out-of-scope/` 知识库供未来同类请求翻旧账。
+- 丢弃了什么：triage 的表单式逐字段 intake，harbor 用标签门控（`harbor:need-info`/`harbor:need-decision`/`ready-for-human`/`ready-for-agent`）驱动流转；被拒项沉淀为 `.out-of-scope/` 知识库供未来同类请求翻旧账。
 - 为什么：工厂的进货口由 tracker 标签驱动，事件流转比表单更贴合自动链。
 
 ## loft ← prototype

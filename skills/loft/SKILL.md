@@ -75,7 +75,7 @@ The captain reacted, the answer sits where the decision lives, the artifact sits
 
 ## Provenance
 
-Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) `prototype` (MIT © 2026 Matt Pocock) — concepts re-expressed in shipyard vocabulary, not ported verbatim.
+Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) `prototype` (MIT © 2026 Matt Pocock) — concepts re-expressed in shipyard vocabulary, not ported verbatim; see [CREDITS.md](../../CREDITS.md).
 
 - **Absorbed:** the throwaway marking discipline (artifact visibly labeled as a loft, placed beside the code it probes), state exposure on every interaction including UI variant switches, and the context-pointer rule — the decision record links the `loft/<name>` branch as the primary source.
 - **Dropped:** the two-branch reference-doc framing (loft's own forks already cover it) and the scratch-database escape hatch (v1 treats persistence as out of scope outright).

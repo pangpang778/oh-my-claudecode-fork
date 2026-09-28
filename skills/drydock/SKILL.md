@@ -390,7 +390,7 @@ Diff actual repo state against the shipyard map; report: missing surfaces, a mis
 
 ## Absorption note
 
-Vocabulary in the governance loop above (challenge-on-collision, sharpen-the-fuzzy, write-inline, ADR three-test) is absorbed and rewritten from mattpocock/skills `domain-modeling` (MIT © 2026 Matt Pocock).
+Vocabulary in the governance loop above (challenge-on-collision, sharpen-the-fuzzy, write-inline, ADR three-test) is absorbed and rewritten from mattpocock/skills `domain-modeling` (MIT © 2026 Matt Pocock); see [CREDITS.md](../../CREDITS.md).
 
 - 吸收：术语当场挑战与磨尖纪律、决策落定就地写 CONTEXT.md 不攒批、ADR 三判据（与 architecture-survey 的 ADR test 对齐）
 - 丢弃：CONTEXT-MAP.md 多上下文布局——v1 船坞是单仓库单一上下文，等真实多仓库需求出现再吸收
