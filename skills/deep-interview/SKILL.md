@@ -240,7 +240,7 @@ The ontology snapshots track convergence mathematically; this discipline keeps t
 - **Sharpen overloaded terms.** When the user's word is doing double duty, propose a canonical name and get it confirmed: "You keep saying `dock` — is that the physical berth or the whole harbor? Pick one term for each."
 - **Stress the boundary with a concrete case.** When two entities are being distinguished, probe the edge: name a specific instance that sits between them and ask which side it falls on. Vague boundaries survive abstract discussion; they break on real examples.
 - **Cross-check against the repo.** When the user states how something works and the brownfield context disagrees, surface the contradiction with the citation instead of letting it pass.
-- **Update `CONTEXT.md` inline, the round the term settles.** Do not batch vocabulary into spec crystallization. If the repo has no `CONTEXT.md`, create it lazily on the first resolved term. `CONTEXT.md` is a glossary and nothing else — no implementation detail, no acceptance criteria, no spec content. The spec records the interview's full state; the glossary records only the words.
+- **Update `CONTEXT.md` inline, the round the term settles.** Do not batch vocabulary into spec crystallization. If the repo has no `CONTEXT.md`, create it lazily on the first resolved term, writing the resolved document-language tag into its frontmatter as `documentLanguage: <tag>` (BCP-47 style, e.g. `en` or `zh-Hans`) per the drydock contract — the yard gate audits that marker. `CONTEXT.md` is a glossary and nothing else — no implementation detail, no acceptance criteria, no spec content. The spec records the interview's full state; the glossary records only the words.
 
 ## Phase 2: Interview Loop
 
