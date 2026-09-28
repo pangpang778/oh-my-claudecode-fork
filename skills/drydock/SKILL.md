@@ -365,6 +365,12 @@ Tell the user, and rely on these flows to fill the skeleton:
 - **anyone** can add a project skill to .omc/skills/ — the barrier is the skillify quality gate, not permission
 - **wiki** (OMC) compounds session knowledge; promote anything referenced twice into docs/business/
 
+**The glossary is a weapon, not a ledger.** Recording settled terms is the floor; the discipline that earns each entry happens inside every design conversation:
+
+- **Challenge on collision.** When someone uses a word that contradicts CONTEXT.md, call it out in the same breath — "the glossary pins X as A; what you just described is B — which one is the ship's word?" Settle it before the sentence reaches a spec or a ticket.
+- **Sharpen the fuzzy.** An overloaded term gets one canonical name on the spot — if two speakers could map the same word to two different things, force the choice now. Vague words do not survive a round trip into code naming.
+- **Write inline, never in batches.** The moment a term or a decision settles, it lands in CONTEXT.md (terms) or docs/adr/ (decisions) right there — capture deferred is capture lost. ADRs stay rare: open one only when it is hard to reverse, surprising without context, and the result of a real tradeoff — all three at once, the same test launch and architecture-survey apply.
+
 The rule that keeps 先动手 aligned: **starting needs no permission; landing goes into a shipyard slot.** A change that cannot say which slot it lands in (or explicitly none) is the smell.
 
 ### 5. Report
@@ -379,3 +385,13 @@ The rule that keeps 先动手 aligned: **starting needs no permission; landing g
 Diff actual repo state against the shipyard map; report: missing surfaces, a missing or invalid `CONTEXT.md` frontmatter `documentLanguage` tag, CLAUDE.md sections that point at dead paths, CONTEXT.md terms unused in code, and standards never referenced. For each finding, state the confidence (`high` when mechanically checkable, `low` when heuristic) and whether it is actionable after excluding throwaway/scratch repositories explicitly declared by the user. Launch's yard gate treats high-confidence actionable findings as blocking; low-confidence or explicitly-classified false-positive findings, and findings in a user-declared scratch/throwaway scope, may be overridden only with deliberate per-invocation intent (see `/oh-my-claudecode:launch`). `/oh-my-claudecode:ask-navigator` may also run this audit in report-only mode while charting a foggy effort: findings are recorded verbatim in the map's Notes (never swallowed) and remain live findings for the launch yard gate.
 
 **The structured exit contract.** The mechanical subset of this audit is executable: `node scripts/shipyard-audit.mjs [repoRoot]` checks the high-confidence classes only — missing surfaces, a missing/invalid `documentLanguage` tag, dead paths in `CLAUDE.md`, project-skill triggers present, and intent statuses within the documented vocabulary — and emits JSON on stdout (human summary on stderr) in the same finding vocabulary the lookout CLI uses: `severity` (high/medium/low/info), `confidence` (high/low), `actionable`, plus a stable finding id, evidence, and advice. Exit code 0 = clean, 1 = high-confidence actionable findings present, 2 = invocation error. The heuristic classes (terms unused in code, standards never referenced) stay in this prose layer by design — they are `low`-confidence by construction and the script never invents findings it cannot verify mechanically. Read-only.
+
+---
+
+## Absorption note
+
+Vocabulary in the governance loop above (challenge-on-collision, sharpen-the-fuzzy, write-inline, ADR three-test) is absorbed and rewritten from mattpocock/skills `domain-modeling` (MIT © 2026 Matt Pocock).
+
+- 吸收：术语当场挑战与磨尖纪律、决策落定就地写 CONTEXT.md 不攒批、ADR 三判据（与 architecture-survey 的 ADR test 对齐）
+- 丢弃：CONTEXT-MAP.md 多上下文布局——v1 船坞是单仓库单一上下文，等真实多仓库需求出现再吸收
+- 为什么：挑战与内联落笔把词汇表从登记簿变成设计武器；只留判据不留布局，改的是纪律不是文件树
