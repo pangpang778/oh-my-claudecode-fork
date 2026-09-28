@@ -58,4 +58,6 @@ A candidate the captain declines with a load-bearing reason is offered as an ADR
 
 The survey is done when the report exists with evidence, rankings, and risk notes for every finding — and no file was modified.
 
-> Adapted in part from mattpocock/skills (codebase-design), MIT © 2026 Matt Pocock. See [CREDITS.md](../../CREDITS.md).
+## Provenance
+
+Adapted in part from mattpocock/skills (codebase-design), MIT © 2026 Matt Pocock. See [CREDITS.md](../../CREDITS.md).
