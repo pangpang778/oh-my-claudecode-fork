@@ -21,10 +21,13 @@ import {
 } from '../cleanup-manifest.js';
 
 const directories: string[] = [];
+let savedStateDir: string | undefined;
 
 function project(): string {
   const directory = mkdtempSync(join(tmpdir(), 'omc-cleanup-manifest-'));
   directories.push(directory);
+  if (savedStateDir === undefined) savedStateDir = process.env.OMC_STATE_DIR;
+  process.env.OMC_STATE_DIR = join(directory, 'state');
   return directory;
 }
 
@@ -37,6 +40,11 @@ function preparedAndSealed(directory: string, sessionId = 'session-a') {
 
 afterEach(() => {
   for (const directory of directories.splice(0)) rmSync(directory, { recursive: true, force: true });
+  if (savedStateDir !== undefined || process.env.OMC_STATE_DIR !== undefined) {
+    if (savedStateDir === undefined) delete process.env.OMC_STATE_DIR;
+    else process.env.OMC_STATE_DIR = savedStateDir;
+    savedStateDir = undefined;
+  }
 });
 
 describe('durable SessionEnd cleanup manifest', () => {
