@@ -28,10 +28,13 @@ import { readSessionEndJob } from '../cleanup-manifest.js';
 describe('SessionEnd foreground manifest handoff (issue #1700)', () => {
   let tmpDir: string;
   let transcriptPath: string;
+  let savedStateDir: string | undefined;
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'omc-session-end-timeout-'));
     transcriptPath = path.join(tmpDir, 'transcript.jsonl');
+    savedStateDir = process.env.OMC_STATE_DIR;
+    process.env.OMC_STATE_DIR = path.join(tmpDir, 'state');
     fs.writeFileSync(
       transcriptPath,
       JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text: 'done' }] } }),
@@ -41,6 +44,8 @@ describe('SessionEnd foreground manifest handoff (issue #1700)', () => {
   });
 
   afterEach(() => {
+    if (savedStateDir === undefined) delete process.env.OMC_STATE_DIR;
+    else process.env.OMC_STATE_DIR = savedStateDir;
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });
 
