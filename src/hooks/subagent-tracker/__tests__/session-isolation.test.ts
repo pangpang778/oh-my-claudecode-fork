@@ -18,15 +18,23 @@ import {
 
 describe("session isolation", () => {
   let testDir: string;
+  let savedStateDir: string | undefined;
 
   beforeEach(() => {
     testDir = join(tmpdir(), `subagent-isolation-${Date.now()}-${Math.random().toString(36).slice(2)}`);
     mkdirSync(join(testDir, ".omc", "state"), { recursive: true });
+    if (savedStateDir === undefined) savedStateDir = process.env.OMC_STATE_DIR;
+    process.env.OMC_STATE_DIR = join(testDir, "state");
   });
 
   afterEach(() => {
     flushPendingWrites();
     rmSync(testDir, { recursive: true, force: true });
+    if (savedStateDir !== undefined || process.env.OMC_STATE_DIR !== undefined) {
+      if (savedStateDir === undefined) delete process.env.OMC_STATE_DIR;
+      else process.env.OMC_STATE_DIR = savedStateDir;
+      savedStateDir = undefined;
+    }
   });
 
   function makeState(agentId: string, spawned: number): SubagentTrackingState {
