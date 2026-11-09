@@ -24,6 +24,33 @@
 import { execSync } from 'node:child_process';
 
 const args = process.argv.slice(2);
+const USAGE_HINT = 'Usage: node cleanup-orphans.mjs [--team-name <name>] [--dry-run]';
+
+// Reject malformed arguments BEFORE any process scan: a scoped cleanup must
+// never silently degrade into scan-all (exit 0). Unknown flags and a missing
+// or flag-like --team-name value are usage errors (exit 1).
+let seenTeamName = false;
+for (let i = 0; i < args.length; i++) {
+  const arg = args[i];
+  if (arg === '--dry-run') continue;
+  if (arg === '--team-name') {
+    if (seenTeamName) {
+      console.error(`[cleanup-orphans] Duplicate --team-name argument. ${USAGE_HINT}`);
+      process.exit(1);
+    }
+    seenTeamName = true;
+    const value = args[i + 1];
+    if (value === undefined || value.trim() === '' || value.startsWith('-')) {
+      console.error(`[cleanup-orphans] --team-name requires a value. ${USAGE_HINT}`);
+      process.exit(1);
+    }
+    i++; // consume the value
+    continue;
+  }
+  console.error(`[cleanup-orphans] Unknown argument: ${arg}. ${USAGE_HINT}`);
+  process.exit(1);
+}
+
 const teamNameIdx = args.indexOf('--team-name');
 const rawTeamName = teamNameIdx !== -1 ? args[teamNameIdx + 1] : null;
 const dryRun = args.includes('--dry-run');
